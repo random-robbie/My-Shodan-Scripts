@@ -10,3 +10,5 @@ pip install requests
 ```
 
 Cams.py = Makes a M3U playlist of working IP cams.
+
+engima2_watch.py = Makes a M3U playlist of what people are watching on their engima2 box.
