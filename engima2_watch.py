@@ -58,8 +58,8 @@ try:
         # Loop through the matches and print each IP
 		for service in result['matches']:
 				IP = service['ip_str']
-				PORT = re.compile("'port': (.+?),").findall(str(service))[0]
-				CC = re.compile("'country_name': '(.+?)'").findall(str(service))[0]
+				PORT = service['port']
+				CC = service['location']['country_name']
 				grab_playling (IP,PORT,CC)
 
 				
