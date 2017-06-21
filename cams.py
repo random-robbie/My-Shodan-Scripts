@@ -54,7 +54,7 @@ try:
         # Loop through the matches and print each IP
 		for service in result['matches']:
 				IP = service['ip_str']
-				CC = re.compile("'country_name': '(.+?)'").findall(str(service))[0]				
+				CC = service['location']['country_name']				
 				test_cam (IP,CC)
 				
 except Exception as e:
