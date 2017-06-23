@@ -28,6 +28,8 @@ def grab_file (IP,PORT):
 			text_file.close()
 		if '404 File Not Found' in response.text:
 			print ("[*] Not Vunerable. [*]")
+	except requests.exceptions.Timeout:
+		print ("[*] "+IP+" Timeout unable to connect [*]")
 	except Exception as e:
 		print('Error: %s' % e)
 
