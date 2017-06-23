@@ -11,7 +11,7 @@ import re
 import requests
 
 # Configuration
-API_KEY = "YOUR API KEY"
+API_KEY = "YOURAPIKEY"
 SEARCH_FOR = "title:'Open Webif'"
 session = requests.Session()
 
@@ -20,12 +20,17 @@ def grab_playling (IP,PORT,CC):
 	try:
 		if PORT == "80":
 			URL = "http://"+IP+"/web/streamcurrent.m3u"
+			
+		if PORT == "443":
+			URL = "https://"+IP+"/web/streamcurrent.m3u"
+			
+		if PORT == "8443":
+			URL = "https://"+IP+"/web/streamcurrent.m3u"
 		else:
 			URL = "http://"+IP+":"+PORT+"/web/streamcurrent.m3u"
-			
 		
 		headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0","Connection":"close","Accept-Language":"en-US,en;q=0.5","Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","Upgrade-Insecure-Requests":"1"}
-		response = session.get(URL, headers=headers, timeout=5)
+		response = session.get(URL, headers=headers,timeout=15, verify=False)
 		result = str(response.text)
 		if 'EXTVLCOPT' in result:
 			fix = result.replace("#EXTM3U","")
@@ -39,7 +44,9 @@ def grab_playling (IP,PORT,CC):
 				text_file.write(""+fix+"\n")
 				text_file.close()
 				print ("[*] OOOOH some one is watching something... [*]\n")
-			
+	except KeyboardInterrupt:
+		print ("Ctrl-c pressed ...")
+		sys.exit(1)
 	except Exception as e:
 		#print (e)
 		print ("[*] Nothing Found on IP:"+IP+" [*]\n")
@@ -59,10 +66,13 @@ try:
         # Loop through the matches and print each IP
 		for service in result['matches']:
 				IP = service['ip_str']
-				PORT = service['port']
+				PORT = str(service['port'])
 				CC = service['location']['country_name']
 				grab_playling (IP,PORT,CC)
 
+except KeyboardInterrupt:
+	print ("Ctrl-c pressed ...")
+	sys.exit(1)
 				
 except Exception as e:
 		print('Error: %s' % e)
