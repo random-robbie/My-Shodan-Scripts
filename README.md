@@ -1,6 +1,8 @@
 # My-Shodan-Scripts
 Collection of Scripts for shodan searching stuff.
 
+Written using Python3 as a heads up not sure if works on python2
+
 Requirements
 -----
 
