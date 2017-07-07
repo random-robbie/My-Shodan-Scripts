@@ -54,8 +54,7 @@ def grab_file (IP,PORT,FILE):
 		print (e)
 		print ("[*] Nothing Found on IP:"+IP+" [*]\n")
 	
-#grab_file ("86.131.5.61","80",FILE)
-#exit()
+
 
 
 	
