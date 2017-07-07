@@ -40,7 +40,7 @@ def grab_playling (IP,PORT,CC):
 			for number in num:
 				fix = fix.replace(number,"")
 				fix = fix.replace("#EXTVLCOPT:program=","#EXTINF:-0, "+IP+" - "+CC+"")
-				text_file = open("watching.m3u", "a")
+				text_file = open("/m3u/watching.m3u", "a")
 				text_file.write(""+fix+"\n")
 				text_file.close()
 				print ("[*] OOOOH some one is watching something... [*]\n")
