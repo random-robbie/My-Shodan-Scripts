@@ -14,7 +14,7 @@ import sys
 
 # Configuration
 API_KEY = "YOUR API KEY"
-SEARCH_FOR = 'WWW-Authenticate: Basic realm="Merit LILIN Ent. Co., Ltd." country:"GB"'
+SEARCH_FOR = 'WWW-Authenticate: Basic realm="Merit LILIN Ent. Co., Ltd."'
 
 
 def test_cam (IP,PORT,CC):
