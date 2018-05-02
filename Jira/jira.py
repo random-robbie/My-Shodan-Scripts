@@ -36,8 +36,8 @@ def grab_file (IP,PORT,FILE):
 		result = response.text
 		if 'ami-id' in result:
 			if "instance-id" in result:
-				text_file = open("./cfg/"+IP+"-jira.cfg", "a")
-				text_file.write(""+result+"\n")
+				text_file = open("./cfg/jira.cfg", "a")
+				text_file.write("https://"+IP+":"+PORT+"\n")
 				text_file.close()
 				print ("[*] Jira... Found [*]\n")
 				print (result)
