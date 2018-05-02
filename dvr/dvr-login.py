@@ -90,7 +90,7 @@ def test_dvr (IP,PORT,CC):
 
 				cabeceras = [hdUsr, hdPass, hdRole]
 				text_file = open("./cfg/DVR-Login.cfg", "a")
-				text_file.write("http://"+IP+":"+PORT+" - Username: "+str(_usuario)+" Password: "+str(_password)+"\n")
+				text_file.write("http://"+IP+":"+PORT+" - Username: "+str(_usuario)+" Password: "+str(_password)+" - Country: "+CC+"\n")
 				text_file.close()
 
 			tp.table(final_data, cabeceras, width=20)
