@@ -16,7 +16,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
 API_KEY = "YOURAPI"
-SEARCH_FOR = 'html:"/login.rsp" country:gb'
+SEARCH_FOR = 'html:"/login.rsp"'
 session = requests.Session()
 class Colors:
     BLUE        = '\033[94m'
