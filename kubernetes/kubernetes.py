@@ -16,6 +16,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 # Configuration
 API_KEY = "YOURAPIKEY"
 SEARCH_FOR = 'ssl:"company x"'
+FILE = "./cfg/kube.cfg"
 session = requests.Session()
 
 def filter_result(str):
@@ -34,7 +35,7 @@ def grab_file (IP,FILE):
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
 		if 'pods' in result:
-			text_file = open("./cfg/kube.cfg", "a")
+			text_file = open(FILE, "a")
 			text_file.write("https://"+IP+":"+PORT+"/pods\n")
 			text_file.close()
 			print ("[*] Kubernetes... Found [*]\n")
@@ -66,7 +67,7 @@ try:
 				IP = service['ip_str']
 				PORT = str(service['port'])
 				CC = service['location']['country_name']
-				grab_file (IP)
+				grab_file (IP,FILE)
 except KeyboardInterrupt:
 		print ("Ctrl-c pressed ...")
 		sys.exit(1)
