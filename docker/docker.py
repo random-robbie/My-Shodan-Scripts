@@ -33,7 +33,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
 		if "Image"in  result:
-			if any(re.findall(r'minergate|xmr-stak-cpu|xmrdemo|140.82.21.105|144.202.25.142|xmrigCC', result, re.IGNORECASE)):
+			if any(re.findall(r'minergate|xmr-stak-cpu|xmrdemo|140.82.21.105|144.202.25.142|xmrigCC|proton', result, re.IGNORECASE)):
 				text_file = open("./cfg-hijacked/"+IP+"-hijacked.cfg", "a")
 				text_file.write(""+result+"\n")
 				text_file.close()
