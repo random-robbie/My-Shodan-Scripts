@@ -18,17 +18,12 @@ FILE = "/v1.24/containers/json"
 session = requests.Session()
 
 def filter_result(str):
-	str.strip() #trim
-	str.lstrip() #ltrim
-	str.rstrip() #rtrim
-	return str
+	return str.strip()
 
 def grab_file (IP,PORT,FILE):
 	print ("[*] Testing: "+IP+" on Port: "+PORT+"[*]\n")
 	try:
-		
 		URL = "http://"+IP+":"+PORT+""+FILE+""
-		
 		headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0","Connection":"close","Accept-Language":"en-US,en;q=0.5","Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","Upgrade-Insecure-Requests":"1"}
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
@@ -44,18 +39,11 @@ def grab_file (IP,PORT,FILE):
 				text_file.close()
 				print ("[*] Live Docker API Whooops.. [*]\n")
 	except KeyboardInterrupt:
-		print ("Ctrl-c pressed ...")
-		sys.exit(1)
-			
+		sys.exit("Ctrl-c pressed ...")			
 	except Exception as e:
 		print (e)
 		print ("[*] Nothing Found on IP:"+IP+" [*]\n")
-	
 
-
-
-	
-	
 try:
         # Setup the api
 		api = shodan.Shodan(API_KEY)
@@ -70,9 +58,6 @@ try:
 				CC = service['location']['country_name']
 				grab_file (IP,PORT,FILE)
 except KeyboardInterrupt:
-		print ("Ctrl-c pressed ...")
-		sys.exit(1)
-				
+		sys.exit("Ctrl-c pressed ...")				
 except Exception as e:
-		print('Error: %s' % e)
-		sys.exit(1)
+		sys.exit('Error: %s' % e)
