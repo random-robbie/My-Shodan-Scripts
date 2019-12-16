@@ -27,9 +27,8 @@ def check_login (IP,PORT,CC):
 		return False
 	
 	if response.status_code == 200:
-		text_file = open("defaults.txt", "a")
-		text_file.write("[*] http://"+IP+":"+PORT+" - Country: "+CC+"\n")
-		text_file.close()
+		with open("defaults.txt", "a") as text_file:
+			text_file.write("[*] http://"+IP+":"+PORT+" - Country: "+CC+"\n")
 		return True
 		
 		
@@ -40,10 +39,7 @@ def test_ip (IP,PORT):
 	try:
 		response = session.get("http://"+IP+":"+PORT+"/", headers=headers)
 
-		if response.status_code == 200:
-			return True
-		else:
-			return False
+		return response.status_code == 200
 	except:
 			return False
 
@@ -62,14 +58,11 @@ try:
 				CC = service['location']['country_name']
 				print (Fore.YELLOW +"[*] Trying "+IP+" on "+PORT+" Country: "+CC+" [*]")
 				test = test_ip (IP,PORT)
-				if test == True:
-					live = check_login(IP,PORT,CC)
-					if live == True:
+				if test:
+					if check_login(IP,PORT,CC):
 						print (Fore.GREEN +"[*] Working Login Found [*]")
-				if test == False:
+				else:
 					print (Fore.RED +"[*] Login Failed [*]")
 				
 except Exception as e:
-		print (e)
-		print('Error: %s' % e)
-		sys.exit(1)
+		sys.exit('Error: %s' % e)
