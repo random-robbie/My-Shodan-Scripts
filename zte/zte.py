@@ -39,7 +39,7 @@ def grab_file (IP,PORT,FILE):
 		result = response.text
 		if response.status_code == 200:
 			text_file = open("./cfg/zte.cfg", "a")
-			text_file.write("http://"+IP+":"+PORT+"\n")
+			text_file.write("http://"+IP+":"+PORT+"/web_shell_cmd.gch\n")
 			text_file.close()
 			print ("[*] zte... Found [*]\n")
 			print (result)
