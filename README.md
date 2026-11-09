@@ -83,6 +83,13 @@ Every Shodan query used by these scripts is listed in [queries.md](queries.md) s
 | `litellm/litellm.py` | Searches Shodan for LiteLLM proxies serving `/v1/models` without a key, exposing upstream LLM providers and potentially their API keys. Findings saved to `cfg/`. |
 | `openwebui/openwebui.py` | Searches Shodan for Open WebUI instances (`http.title:"Open WebUI"`) answering their config API unauthenticated — open signup lets anyone burn the host's GPU. Findings saved to `cfg/`. |
 | `kafkaui/kafkaui.py` | Searches Shodan for exposed Kafka UI (Provectus) instances answering the clusters API unauthenticated — open access to every topic's data. Findings saved to `cfg/`. |
+| `grafanads/grafana-ds.py` | Searches Shodan for Grafana instances with anonymous access enabled and pulls `/api/datasources` — internal database hosts, users and sometimes passwords. Findings saved to `cfg/`. |
+| `argocd/argocd.py` | Searches Shodan for Argo CD instances with anonymous access and pulls the applications API — manifests embed Helm values, Git URLs and frequently credentials. Findings saved to `cfg/`. |
+| `metabase/metabase.py` | Searches Shodan for Metabase instances exposing `/api/session/properties` — an unconfigured instance leaks its setup token, enough to create an admin account. Findings saved to `cfg/`. |
+| `harbor/harbor.py` | Searches Shodan for Harbor registries exposing the users API unauthenticated — private production image registries. Findings saved to `cfg/`. |
+| `nexus/nexus.py` | Searches Shodan for Nexus Repository instances with anonymous browsing (the default) — repository and artifact lists. Findings saved to `cfg/`. |
+| `artifactory/artifactory.py` | Searches Shodan for JFrog Artifactory instances with anonymous API access — repository lists and the internal builds inside them. Findings saved to `cfg/`. |
+| `actuator/actuator.py` | Searches Shodan for Spring Boot applications and probes `/actuator/env` (dumps database passwords and API keys) and `/actuator/heapdump` (parseable for credentials from memory). Findings saved to `cfg/`. |
 
 ### Network devices and CVEs
 

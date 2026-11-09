@@ -63,12 +63,19 @@ python3 docker/docker.py
 |---|---|
 | `assets/assets.py` | `SSL:"COMPANY NAME FROM SSL CERT" -"AkamaiGHost" -"GHost"` — replace with the target company name |
 | `astra/astra.py` | `html:"Astra Control Panel"` |
+| `actuator/actuator.py` | `http.html:"Whitelabel Error Page"` |
+| `argocd/argocd.py` | `http.title:"Argo CD"` |
+| `artifactory/artifactory.py` | `http.title:"Artifactory"` |
 | `cisco/cisco.py`, `cisco/asa-2020.py` | `webvpn port:"443"` |
 | `django/django.py` | `title:"DisallowedHost"` |
 | `dvr/dvr-login.py` | `html:"/login.rsp"` |
 | `gsoap/gsoap.py` | `gSOAP/2.8 country:us` |
+| `grafanads/grafana-ds.py` | `title:"Grafana"` |
+| `harbor/harbor.py` | `http.title:"Harbor"` |
+| `metabase/metabase.py` | `http.title:"Metabase"` |
 | `NetSuveillance/netsuv.py` | `title:"NETSurveillance WEB"` |
 | `nessus/nessus.py` | `title:"Nessus"` |
+| `nexus/nexus.py` | `http.title:"Nexus Repository Manager"` |
 | `sap/sap-add-admin.py` | `netweaver` |
 | `stalker-m3u/stalker-m3u.py` | `title:"stalker_portal"` |
 
