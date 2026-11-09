@@ -64,6 +64,12 @@ Options: `-H/--host` (IP address of the box), `-P/--port` (default 80), `-T/--ti
 | `stalker-m3u/stalker-m3u.py` | Searches Shodan for Stalker Portal IPTV servers and retrieves M3U playlists. |
 | `nessus/nessus.py` | Searches Shodan for Nessus scanners and tries the `admin:admin` login. |
 | `ollama/ollama.py` | Searches Shodan for exposed Ollama instances (`port:11434`) and sends a test prompt to the `/api/generate` API; results are written to `output.txt`. |
+| `n8n/n8n.py` | Searches Shodan for exposed n8n workflow automation (`port:5678`) and checks whether the REST API answers without authentication — an open editor allows unauthenticated workflow execution. Findings saved to `cfg/`. |
+| `jupyter/jupyter.py` | Searches Shodan for Jupyter Notebook servers (`product:"Jupyter Notebook"`) and checks whether the kernel API answers unauthenticated — open kernels allow arbitrary code execution. Findings saved to `cfg/`. |
+| `ray/ray.py` | Searches Shodan for exposed Ray dashboards (`port:8265`, ShadowRay) and checks whether the version API answers unauthenticated — open dashboards allow cluster job submission. Findings saved to `cfg/`. |
+| `minio/minio.py` | Searches Shodan for exposed MinIO object storage (`product:"MinIO"`) and checks the public health endpoint plus anonymous root listing. Findings saved to `cfg/`. |
+| `registry/registry.py` | Searches Shodan for exposed Docker Registry v2 (`port:5000`, `Docker-Distribution-API-Version`) and pulls the image catalog, which leaks private images. Findings saved to `cfg/`. |
+| `flowise/flowise.py` | Searches Shodan for exposed Flowise (`port:3000`) and Langflow (`port:7860`) LLM workflow builders — unauthenticated instances allow code execution through flow nodes. Findings saved to `cfg/`. |
 
 ### Network devices and CVEs
 
