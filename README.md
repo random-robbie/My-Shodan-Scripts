@@ -75,6 +75,14 @@ Every Shodan query used by these scripts is listed in [queries.md](queries.md) s
 | `minio/minio.py` | Searches Shodan for exposed MinIO object storage (`product:"MinIO"`) and checks the public health endpoint plus anonymous root listing. Findings saved to `cfg/`. |
 | `registry/registry.py` | Searches Shodan for exposed Docker Registry v2 (`port:5000`, `Docker-Distribution-API-Version`) and pulls the image catalog, which leaks private images. Findings saved to `cfg/`. |
 | `flowise/flowise.py` | Searches Shodan for exposed Flowise (`port:3000`) and Langflow (`port:7860`) LLM workflow builders — unauthenticated instances allow code execution through flow nodes. Findings saved to `cfg/`. |
+| `nodered/nodered.py` | Searches Shodan for Node-RED editors served without authentication — an open editor allows arbitrary command execution via injected nodes. Findings saved to `cfg/`. |
+| `portainer/portainer.py` | Searches Shodan for Portainer management panels reachable publicly (`http.title:"Portainer"`) and logs version info from the status API. Findings saved to `cfg/`. |
+| `rabbitmq/rabbitmq.py` | Searches Shodan for RabbitMQ management interfaces (`port:15672`) and tries the default `guest:guest` account against the API. Findings saved to `cfg/`. |
+| `gitlab/gitlab.py` | Searches Shodan for GitLab instances exposing `/api/v4/version` without a token, which usually means unauthenticated user enumeration too. Findings saved to `cfg/`. |
+| `retool/retool.py` | Searches Shodan for self-hosted Retool instances — internal tool builders wired directly into company databases. Findings saved to `cfg/`. |
+| `litellm/litellm.py` | Searches Shodan for LiteLLM proxies serving `/v1/models` without a key, exposing upstream LLM providers and potentially their API keys. Findings saved to `cfg/`. |
+| `openwebui/openwebui.py` | Searches Shodan for Open WebUI instances (`http.title:"Open WebUI"`) answering their config API unauthenticated — open signup lets anyone burn the host's GPU. Findings saved to `cfg/`. |
+| `kafkaui/kafkaui.py` | Searches Shodan for exposed Kafka UI (Provectus) instances answering the clusters API unauthenticated — open access to every topic's data. Findings saved to `cfg/`. |
 
 ### Network devices and CVEs
 

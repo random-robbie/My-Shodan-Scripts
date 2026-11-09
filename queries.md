@@ -21,6 +21,7 @@ python3 docker/docker.py
 | `docker/docker.py` | `port:2375 product:"Docker"` |
 | `etcd/etcd.py` | `port:"2379" product:"etcd"` |
 | `flowise/flowise.py` | `port:3000 http.html:"Flowise"` and `port:7860 http.title:"Langflow"` |
+| `gitlab/gitlab.py` | `http.title:"GitLab"` |
 | `grafana/grafana.py` | `title:"Grafana" port:"443"` |
 | `GetSimpleCMS/cms.py` | `html:"GetSimple" country:"US" port:443` |
 | `Jaspersoft/jasper.py` | `title:"TIBCO Jaspersoft:" port:"443" 1970"` |
@@ -29,14 +30,21 @@ python3 docker/docker.py
 | `jupyter/jupyter.py` | `product:"Jupyter Notebook"` |
 | `Kibana/kib.py` | `http.component:"kibana" port:"443" -country:cn,fr,se,es,sg` |
 | `kubernetes/kubernetes.py` | `ssl:"company x"` — replace with the target company name |
+| `kafkaui/kafkaui.py` | `http.title:"Kafka UI"` |
+| `litellm/litellm.py` | `http.title:"LiteLLM"` |
 | `minio/minio.py` | `product:"MinIO"` |
 | `n8n/n8n.py` | `port:5678 http.html:"n8n"` |
+| `nodered/nodered.py` | `http.title:"Node-RED"` |
 | `Nuxeo/nux.py` | `/nuxeo/ country:"US" port:"443"` |
 | `ollama/ollama.py` | `port:11434 http.html:"Ollama is running" country:"US"` |
 | `oodo/oodo.py` | `title:"odoo"` |
+| `openwebui/openwebui.py` | `http.title:"Open WebUI"` |
 | `op5/op5.py` | `title:"op5"` |
 | `openfire/openfire.py` | `title:"Openfire Admin Console"` |
+| `portainer/portainer.py` | `http.title:"Portainer"` |
+| `rabbitmq/rabbitmq.py` | `product:"RabbitMQ" port:"15672"` |
 | `ray/ray.py` | `port:8265 http.title:"Ray"` |
+| `retool/retool.py` | `http.html:"Retool"` |
 | `registry/registry.py` | `port:5000 "Docker-Distribution-API-Version"` |
 | `Shipyard/shipyard.py` | `title:"shipyard"` |
 | `simplehttp/simple.py` | `product:"SimpleHTTPServer"` |
