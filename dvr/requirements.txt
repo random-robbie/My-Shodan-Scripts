@@ -1,3 +1,4 @@
 shodan
 tableprint
 requests
+filelock>=4.2.1 # not directly required, pinned by Snyk to avoid a vulnerability
