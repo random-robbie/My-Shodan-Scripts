@@ -1,0 +1,6 @@
+# Install once for every script in the collection:
+#   pip install -r requirements.txt
+shodan>=1.31.0
+requests>=2.31.0
+colorama>=0.4.6
+tableprint>=0.1.0
