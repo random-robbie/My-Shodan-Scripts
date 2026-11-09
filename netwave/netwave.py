@@ -11,7 +11,13 @@ import requests
 import sys
 
 # Configuration
-API_KEY = "YOURSHODANAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'Server: Netwave IP Camera'
 
 session = requests.Session()

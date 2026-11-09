@@ -3,7 +3,13 @@ import requests
 import json
 
 # Replace 'YOUR_API_KEY' with your actual Shodan API key
-SHODAN_API_KEY = 'YOUR_API_KEY'
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+SHODAN_API_KEY = get_api_key()
 OUTPUT_FILE = 'output.txt'
 
 def main():
@@ -31,7 +37,7 @@ def main():
             response = requests.post(url, json=payload)
             if response.status_code == 200:
                 # Write the IP and port to the output file
-                with open(OUTPUT_FILE, 'a') as f:
+                with open_output(OUTPUT_FILE, 'a') as f:
                     f.write(f"{ip}:{port}\n")
                 print(f"Response received from {ip}:{port}, logged to {OUTPUT_FILE}")
             else:

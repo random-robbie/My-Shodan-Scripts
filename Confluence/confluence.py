@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'confluence'
 FILE = "/rest/tinymce/1/macro/preview"
 session = requests.Session()
@@ -37,7 +43,7 @@ def grab_file (IP,PORT,FILE):
 
 		result = response.text
 		if 'classpath:/securityContext.xml' in result:
-			text_file = open("./cfg/Confluence.cfg", "a")
+			text_file = open_output("cfg/Confluence.cfg", "a")
 			text_file.write("https://"+IP+":"+PORT+"\n")
 			text_file.close()
 			print ("[*] Confluence... Found [*]\n")

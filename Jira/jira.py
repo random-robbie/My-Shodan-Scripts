@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'http.component:jira'
 FILE = "/plugins/servlet/oauth/users/icon-uri?consumerUri=https://www.google.com"
 session = requests.Session()
@@ -35,7 +41,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
 		if '/images/branding/product' in result:
-			text_file = open("./cfg/jira.cfg", "a")
+			text_file = open_output("cfg/jira.cfg", "a")
 			text_file.write("https://"+IP+":"+PORT+"\n")
 			text_file.close()
 			print ("[*] Jira... Found [*]\n")

@@ -14,7 +14,13 @@ import requests
 
 
 # Configuration
-API_KEY = "YOURSHODANAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = "title:'Open Webif'"
 CHANNEL_NAME = "LFCTV"
 CHANNEL_ID = "1:0:1:F06:7D7:2:11A0000:0:0:0:"

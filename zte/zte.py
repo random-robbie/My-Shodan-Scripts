@@ -17,7 +17,13 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'title:"F460" "Mini web server 1.0 ZTE corp 2005" port:"80"'
 FILE = "/web_shell_cmd.gch"
 session = requests.Session()
@@ -38,7 +44,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
 		if response.status_code == 200:
-			text_file = open("./cfg/zte.cfg", "a")
+			text_file = open_output("cfg/zte.cfg", "a")
 			text_file.write("http://"+IP+":"+PORT+"/web_shell_cmd.gch\n")
 			text_file.close()
 			print ("[*] zte... Found [*]\n")

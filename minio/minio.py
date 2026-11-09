@@ -13,7 +13,13 @@ import requests
 import sys
 
 # Configuration
-API_KEY = "YOUR API KEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'product:"MinIO"'
 HEALTH_PATH = "/minio/health/live"
 CFG_DIR = "cfg"

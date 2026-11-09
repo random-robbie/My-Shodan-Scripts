@@ -1,6 +1,6 @@
 # My-Shodan-Scripts
 
-A collection of Python 3 scripts for searching Shodan and then probing the results. Each script has a hardcoded Shodan API key at the top (`API_KEY = "YOURAPIKEY"`) — replace it with your own key before running, otherwise the scripts will fail. Most scripts take no command-line arguments: run them and they query Shodan, check each result, and save findings to text files in a `cfg` (or similar) directory within the script's folder.
+A collection of Python 3 scripts for searching Shodan and then probing the results. Every script reads the Shodan API key from the `SHODAN_API_KEY` environment variable — set it once and run any script, no editing required. Most scripts take no command-line arguments: they query Shodan, check each result, and save findings to text files in a `cfg` (or similar) directory within the script's folder. Output directories are created automatically when missing.
 
 Requires Python 3 with the `shodan` and `requests` libraries:
 
@@ -10,22 +10,27 @@ pip install shodan requests
 
 ## Usage
 
-1. Edit the script you want to use and set `API_KEY` to your Shodan API key.
-2. Run it with Python 3 from inside the script's directory (most scripts write results relative to the current directory):
+1. Export your Shodan API key once:
 
-```bash
-cd Confluence
-python3 confluence.py
-```
+   ```bash
+   export SHODAN_API_KEY=your-key-here
+   ```
+
+2. Run a script — either from the repository root or from anywhere:
+
+   ```bash
+   python3 Confluence/confluence.py
+   ```
 
 The only script with command-line options is `enigma2_messages/enigma2_message.py`, which sends an on-screen message to an Enigma2 box:
 
 ```bash
-cd enigma2_messages
-python3 enigma2_message.py -H 192.168.1.10 -P 80 -M "Hello World..." -T 30 -E 1
+python3 enigma2_messages/enigma2_message.py -H 192.168.1.10 -P 80 -M "Hello World..." -T 30 -E 1
 ```
 
 Options: `-H/--host` (IP address of the box), `-P/--port` (default 80), `-T/--timeout` (seconds the message stays on screen), `-M/--message` (text to display), `-E/--errortype` (1 = info, 2 = warning, 3 = error, 0 = yes/no).
+
+Every Shodan query used by these scripts is listed in [queries.md](queries.md) so you can paste them straight into the Shodan search UI.
 
 ## Scripts
 

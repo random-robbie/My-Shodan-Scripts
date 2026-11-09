@@ -13,7 +13,13 @@ from colorama import init, Fore, Back, Style
 init(autoreset=True)
 
 # Configuration
-API_KEY = "YOURSHODANKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'title:"shipyard" HTTP/1.1 200 OK Accept-Ranges: bytes Content-Length: 5664'
 
 def check_login (IP,PORT,CC):

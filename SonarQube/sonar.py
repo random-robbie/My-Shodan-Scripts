@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOUR API KEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'http.favicon.hash:1485257654'
 FILE = "/api/components/search_projects?ps=1"
 session = requests.Session()
@@ -40,7 +46,7 @@ def grab_file (IP,PORT,FILE,TITLE):
 		if response.status_code == 200:
 			if '"total":0' not in response.text:
 				URLi = URL.replace("/api/components/search_projects?ps=1","")
-				text_file = open("./cfg/sonar.cfg", "a")
+				text_file = open_output("cfg/sonar.cfg", "a")
 				text_file.write(""+URLi+" - "+TITLE+"\n")
 				text_file.close()
 				print ("[*] Sonar ... Found - "+TITLE+" [*]\n")

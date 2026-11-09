@@ -13,7 +13,13 @@ from time import sleep
 
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'SSL:"COMPANY NAME FROM SSL CERT" -"AkamaiGHost" -"GHost"'
 
 
@@ -32,7 +38,7 @@ def test_host (IP,PORT):
 			text_file.close()
 			print ("[*] OOOOH we have a live host [*]\n")
 		else:
-			print "Port is not open"
+			print ("Port is not open")
 
 			
 	except KeyboardInterrupt:

@@ -15,7 +15,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "your API KEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'http.component:"mobotix"'
 FILE = "/control/userimage.html"
 session = requests.Session()
@@ -36,7 +42,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers,cookies=cookies, timeout=15, verify=False,auth=HTTPBasicAuth("admin","meinsm"))
 		result = response.text
 		if 'Enable JavaScript / Active Scripting to see more details' in result:
-			text_file = open("./cfg/mobotix.cfg", "a")
+			text_file = open_output("cfg/mobotix.cfg", "a")
 			text_file.write(""+URL2+"\n")
 			text_file.close()
 			print ("[*] Defaults... Found  [*]\n")

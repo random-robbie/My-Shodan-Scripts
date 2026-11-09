@@ -12,7 +12,13 @@ import requests
 from time import sleep
 
 # Configuration
-API_KEY = "YOUR API KEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'port:2375 product:"Docker"'
 FILE = "/v1.24/containers/json"
 session = requests.Session()
@@ -29,12 +35,12 @@ def grab_file (IP,PORT,FILE):
 		result = response.text
 		if "Image"in  result:
 			if any(re.findall(r'minergate|xmr-stak-cpu|xmrdemo|140.82.21.105|144.202.25.142|xmrigCC|proton', result, re.IGNORECASE)):
-				text_file = open("./cfg-hijacked/"+IP+"-hijacked.cfg", "a")
+				text_file = open_output("cfg-hijacked/"+IP+"-hijacked.cfg", "a")
 				text_file.write(""+result+"\n")
 				text_file.close()
 				print ("[*] DOH! this docker server has been hijacked for XMR or DDOS. [*]\n")
 			else:
-				text_file = open("./cfg/"+IP+"-containers.cfg", "a")
+				text_file = open_output("cfg/"+IP+"-containers.cfg", "a")
 				text_file.write(""+result+"\n")
 				text_file.close()
 				print ("[*] Live Docker API Whooops.. [*]\n")

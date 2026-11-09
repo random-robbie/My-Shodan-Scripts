@@ -15,7 +15,13 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 from time import sleep
 
 # Configuration
-API_KEY = "YOURSHODANAPIKEY"
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from common import get_api_key, open_output
+
+API_KEY = get_api_key()
 SEARCH_FOR = 'x-jenkins 200'
 FILE = "/script"
 session = requests.Session()
