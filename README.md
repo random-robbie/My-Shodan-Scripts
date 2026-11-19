@@ -90,6 +90,7 @@ Every Shodan query used by these scripts is listed in [queries.md](queries.md) s
 | `nexus/nexus.py` | Searches Shodan for Nexus Repository instances with anonymous browsing (the default) — repository and artifact lists. Findings saved to `cfg/`. |
 | `artifactory/artifactory.py` | Searches Shodan for JFrog Artifactory instances with anonymous API access — repository lists and the internal builds inside them. Findings saved to `cfg/`. |
 | `artex/artex.py` | Searches Shodan for exposed ARTEX AI pentesting consoles and identifies which serve the backdoored `tomicdd/artex` build (fixed UI build ID `3aC1db3gGU08O4UHbAt4J` on every page). One passive `GET /` per host — the login endpoint that carries the backdoor is never touched. Findings saved to `cfg/`. |
+| `cairn/cairn.py` | Searches Shodan for exposed Cairn servers (oritera's unauthenticated AI pentest-agent board: `reason-chip-running` UI marker + a `title:"Cairn"` census, since the bare title also matches cairn.info). Confirms each host with read-only `GET /openapi.json`, `/projects` and `/settings` — the board API accepts writes unauthenticated, so none are sent. Findings saved to `cfg/`. |
 | `actuator/actuator.py` | Searches Shodan for Spring Boot applications and probes `/actuator/env` (dumps database passwords and API keys) and `/actuator/heapdump` (parseable for credentials from memory). Findings saved to `cfg/`. |
 
 ### Network devices and CVEs
