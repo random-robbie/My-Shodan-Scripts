@@ -17,6 +17,7 @@ python3 docker/docker.py
 
 | Script | Shodan query |
 |---|---|
+| `artex/artex.py` | `http.html:"3aC1db3gGU08O4UHbAt4J"` (backdoored build) and `port:8787 http.html:"ARTEX"` (all ARTEX consoles) |
 | `Confluence/confluence.py` | `confluence` |
 | `docker/docker.py` | `port:2375 product:"Docker"` |
 | `etcd/etcd.py` | `port:"2379" product:"etcd"` |
